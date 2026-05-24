@@ -1,6 +1,14 @@
-# Hadoop Lab com Docker Compose v1
+# Hadoop Lab com Docker Compose
 
-Este projeto sobe um laboratorio Hadoop enxuto com Docker Compose usando imagens `bde2020` baseadas em Hadoop `3.2.1` e Java 8.
+Este projeto sobe um laboratorio Hadoop com Docker Compose usando imagens `bde2020` baseadas em Hadoop `3.2.1` e Java 8.
+
+A topologia deste lab e:
+
+- 1 `namenode`
+- 3 `datanodes`
+- 1 `resourcemanager`
+- 3 `nodemanagers`
+- 1 `historyserver`
 
 O objetivo e disponibilizar um ambiente local simples para estudo de:
 
@@ -17,17 +25,27 @@ O objetivo e disponibilizar um ambiente local simples para estudo de:
 
 ## Servicos que serao criados
 
-- `namenode`: metadados do HDFS e interface web
-- `datanode`: armazenamento de blocos do HDFS
-- `resourcemanager`: gerenciamento de recursos e jobs do YARN
-- `nodemanager`: execucao de containers e tarefas do YARN
-- `historyserver`: historico e logs agregados de aplicacoes
+- `namenode`: e o servico central do HDFS. Ele nao guarda o conteudo dos arquivos em si; ele guarda os metadados.
+  Exemplo: sabe que o arquivo `/input/teste.txt` existe, em quais blocos ele foi dividido e em quais DataNodes esses blocos estao.
+- `datanode1`, `datanode2`, `datanode3`: sao os workers de armazenamento do HDFS. Eles guardam os blocos reais dos arquivos.
+  Exemplo: quando voce faz `hdfs dfs -put /tmp/teste.txt /input/`, o conteudo do arquivo vai para os DataNodes, nao para o NameNode.
+- `resourcemanager`: e o coordenador do YARN. Ele decide onde um job vai rodar e distribui recursos do cluster, como memoria e CPU.
+  Exemplo: quando voce executa um `wordcount`, o ResourceManager escolhe em quais NodeManagers as etapas do job podem rodar.
+- `nodemanager1`, `nodemanager2`, `nodemanager3`: sao os workers de processamento do YARN. Cada NodeManager executa os containers e tarefas enviados pelo ResourceManager.
+  Exemplo: no `wordcount`, um NodeManager pode executar a fase `map` e outro pode executar a fase `reduce`.
+- `historyserver`: guarda e exibe o historico de jobs finalizados e seus logs agregados.
+  Exemplo: depois que o `wordcount` termina, voce pode abrir a interface do History Server para ver o job concluido e consultar detalhes da execucao.
+
+Em resumo:
+
+- HDFS = `namenode` + `datanodes` para armazenamento distribuido
+- YARN = `resourcemanager` + `nodemanagers` para processamento distribuido
 
 ## Pre-requisitos
 
 - Docker Desktop instalado e em execucao
 - Docker Compose v2 disponivel via `docker compose`
-- Portas locais livres: `9870`, `9000`, `9864`, `8088`, `8042`, `8188`
+- Portas locais livres: `9870`, `9000`, `9864`, `9865`, `9866`, `8088`, `8042`, `8043`, `8044`, `8188`
 
 ## Como subir o ambiente
 
@@ -67,9 +85,13 @@ Depois que os containers estiverem inicializados, os servicos ficam disponiveis 
 
 - NameNode UI: http://localhost:9870
 - HDFS RPC / `fs.defaultFS`: `hdfs://localhost:9000`
-- DataNode UI: http://localhost:9864
+- DataNode 1 UI: http://localhost:9864
+- DataNode 2 UI: http://localhost:9865
+- DataNode 3 UI: http://localhost:9866
 - YARN ResourceManager: http://localhost:8088
-- NodeManager UI: http://localhost:8042
+- NodeManager 1 UI: http://localhost:8042
+- NodeManager 2 UI: http://localhost:8043
+- NodeManager 3 UI: http://localhost:8044
 - History Server: http://localhost:8188
 
 ## Configuracao principal
@@ -79,18 +101,76 @@ O arquivo `hadoop.env` aplica algumas definicoes relevantes:
 - `CORE_CONF_fs_defaultFS=hdfs://namenode:9000`
 - `HDFS_CONF_dfs_webhdfs_enabled=true`
 - `HDFS_CONF_dfs_permissions_enabled=false`
+- `HDFS_CONF_dfs_blocksize=134217728` (`128 MB`)
+- `HDFS_CONF_dfs_replication=3`
 - agregacao de logs do YARN habilitada
 - ResourceManager com persistencia de estado
-- limites basicos de memoria e CPU para o NodeManager
+- limites basicos de memoria e CPU para cada NodeManager
 
-Isso torna o ambiente mais simples para laboratorio local e reduz atrito com permissoes no HDFS.
+Isso permite demonstrar replicacao real de blocos no HDFS entre 3 DataNodes, ao mesmo tempo em que mantem o ambiente simples para laboratorio local.
+
+Neste laboratorio:
+
+- o tamanho padrao de bloco do HDFS foi definido como `128 MB`
+- o fator de replicacao padrao foi definido como `3`
+
+Na pratica, isso significa que:
+
+- arquivos pequenos, como os exemplos deste tutorial, normalmente ocupam apenas 1 bloco
+- arquivos maiores que `128 MB` passam a ser divididos em multiplos blocos
+- cada bloco pode ser replicado em ate 3 DataNodes diferentes dentro deste cluster
+
+## Tamanho do bloco HDFS neste projeto
+
+O valor usado neste projeto e:
+
+- `134217728` bytes
+- `131072 KB`
+- `128 MB`
+
+Conceito breve:
+
+- no HDFS, um arquivo e dividido em blocos
+- cada bloco pode ser armazenado e replicado entre os DataNodes
+- neste projeto, um arquivo so sera quebrado em mais de um bloco quando passar de `128 MB`
+
+Exemplos praticos:
+
+- um arquivo de `10 MB` normalmente fica em `1` bloco
+- um arquivo de `128 MB` normalmente fica em `1` bloco
+- um arquivo de `300 MB` normalmente fica em `3` blocos
+
+Como aumentar ou diminuir:
+
+- edite o arquivo `hadoop.env`
+- altere a linha `HDFS_CONF_dfs_blocksize=134217728`
+- o valor deve ser informado em bytes
+
+Exemplos:
+
+- `67108864` = `64 MB`
+- `134217728` = `128 MB`
+- `268435456` = `256 MB`
+
+Depois da alteracao, recrie os containers:
+
+```powershell
+docker compose -f .\docker-compose.yaml up -d
+```
+
+Observacao importante:
+
+- a mudanca vale para novos arquivos gravados depois da alteracao
+- arquivos antigos continuam com o layout de blocos que ja tinham quando foram escritos
 
 ## Persistencia de dados
 
 Os dados sao persistidos em volumes Docker:
 
 - `hadoop_namenode`
-- `hadoop_datanode`
+- `hadoop_datanode1`
+- `hadoop_datanode2`
+- `hadoop_datanode3`
 - `hadoop_historyserver`
 
 Isso significa que reiniciar os containers normalmente nao apaga os dados. Se voce quiser um ambiente totalmente limpo, use `down -v`.
@@ -101,6 +181,32 @@ Verificar se todos os containers subiram:
 
 ```powershell
 docker compose -f .\docker-compose.yaml ps
+```
+
+Verificar os 3 DataNodes registrados no HDFS:
+
+```powershell
+docker exec namenode /opt/hadoop-3.2.1/bin/hdfs dfsadmin -report
+```
+
+Verificar os 3 NodeManagers no YARN:
+
+```powershell
+docker exec resourcemanager /opt/hadoop-3.2.1/bin/yarn node -list
+```
+
+Verificar o tamanho padrao de bloco e o fator de replicacao configurados:
+
+```powershell
+docker exec namenode /opt/hadoop-3.2.1/bin/hdfs getconf -confKey dfs.blocksize
+docker exec namenode /opt/hadoop-3.2.1/bin/hdfs getconf -confKey dfs.replication
+```
+
+Interpretacao esperada neste projeto:
+
+```text
+134217728
+3
 ```
 
 Entrar no container do NameNode:
@@ -140,6 +246,8 @@ echo "ola hadoop hadoop docker" > /tmp/teste.txt
 hdfs dfs -put -f /tmp/teste.txt /input/
 hdfs dfs -ls /input
 hdfs dfs -cat /input/teste.txt
+hdfs dfs -stat %r /input/teste.txt
+hdfs fsck /input/teste.txt -files -blocks -locations
 ```
 
 3. Se tudo estiver correto, a saida final deve mostrar:
@@ -147,6 +255,34 @@ hdfs dfs -cat /input/teste.txt
 ```text
 ola hadoop hadoop docker
 ```
+
+4. O comando `hdfs dfs -stat %r /input/teste.txt` deve retornar:
+
+```text
+3
+```
+
+5. O comando `hdfs fsck` deve indicar `replication=3`, `Live_repl=3` e `Status: HEALTHY`.
+
+6. Se quiser consultar o tamanho padrao de bloco diretamente no cluster:
+
+```bash
+hdfs getconf -confKey dfs.blocksize
+```
+
+A saida esperada e:
+
+```text
+134217728
+```
+
+7. Para validar a distribuicao real de blocos em um arquivo, use:
+
+```bash
+hdfs fsck /input/teste.txt -files -blocks -locations
+```
+
+Arquivos pequenos podem aparecer com apenas `1` bloco, o que e esperado. Para ver varios blocos distribuidos, use um arquivo maior que `128 MB`.
 
 ## Exemplo de teste do MapReduce
 
@@ -212,14 +348,16 @@ ola     1
 
 Depois de executar o `wordcount`, voce pode validar o processamento pelas UIs do cluster:
 
-- `http://localhost:9870`: abra `Utilities > Browse the file system` e confira `/input` e `/output-wordcount`
-- `http://localhost:8088`: veja a aplicacao em `Applications` no ResourceManager
+- `http://localhost:9870`: abra `Datanodes` para confirmar os 3 workers do HDFS e `Utilities > Browse the file system` para conferir `/input` e `/output-wordcount`
+- `http://localhost:8088`: veja a aplicacao em `Applications` e os 3 workers em `Nodes`
 - `http://localhost:8188`: consulte o historico do job finalizado no History Server
+- `http://localhost:9864`, `http://localhost:9865` e `http://localhost:9866`: acompanhe as UIs individuais dos 3 DataNodes
+- `http://localhost:8042`, `http://localhost:8043` e `http://localhost:8044`: acompanhe as UIs individuais dos 3 NodeManagers
 
 ## Observacoes
 
 - Este ambiente e voltado para estudo e desenvolvimento local, nao para producao.
-- O cluster e pequeno e roda em um unico host Docker.
+- O cluster roda em um unico host Docker. Isso ajuda a demonstrar a arquitetura logica do Hadoop, mas nao substitui tolerancia real a falha entre maquinas fisicas.
 - A inicializacao completa pode levar algum tempo na primeira execucao por causa do download das imagens e da formatacao inicial dos servicos.
 
 ## Problemas comuns
@@ -235,6 +373,11 @@ Se o `wordcount` falhar com `Input path does not exist: hdfs://namenode:9000/inp
 - o diretorio `/input` nao existe no HDFS
 - recrie o arquivo com a secao `Exemplo de teste no HDFS`
 - confirme com `docker exec namenode hdfs dfs -ls /input`
+
+Se voce estiver migrando de uma versao anterior deste lab com apenas 1 DataNode:
+
+- metadados antigos podem manter o NameNode em `safe mode` ou causar erro de recuperacao no `ResourceManager`
+- para recomecar limpo com a nova topologia, use `docker compose -f .\docker-compose.yaml down -v` e depois `docker compose -f .\docker-compose.yaml up -d`
 
 Se quiser recriar tudo do zero:
 
