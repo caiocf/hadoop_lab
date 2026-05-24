@@ -295,7 +295,26 @@ A saida esperada e:
 hdfs fsck /input/teste.txt -files -blocks -locations
 ```
 
-Arquivos pequenos podem aparecer com apenas `1` bloco, o que e esperado. Para ver varios blocos distribuidos, use um arquivo maior que `128 MB`.
+Esse comando mostra:
+
+- quantos blocos o arquivo possui
+- o fator de replicacao do arquivo
+- em quais `DataNodes` cada bloco esta armazenado
+
+Exemplo de interpretacao:
+
+- `1 block(s)` significa que o arquivo foi armazenado em `1` bloco
+- `Live_repl=3` significa que esse bloco tem `3` replicas ativas
+- a lista dentro de `DatanodeInfoWithStorage[...]` mostra em quais `DataNodes` esse bloco foi gravado
+
+Trecho tipico de saida:
+
+```text
+/input/teste.txt 25 bytes, replicated: replication=3, 1 block(s):  OK
+0. ... len=25 Live_repl=3 [DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...]]
+```
+
+Arquivos pequenos podem aparecer com apenas `1` bloco, o que e esperado. Para ver varios blocos distribuidos entre os `DataNodes`, use um arquivo maior que `128 MB`.
 
 ## Exemplo de teste do MapReduce
 
