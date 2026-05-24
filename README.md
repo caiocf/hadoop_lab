@@ -22,6 +22,7 @@ O objetivo e disponibilizar um ambiente local simples para estudo de:
 
 - `docker-compose.yaml`: define os servicos do cluster
 - `hadoop.env`: concentra as variaveis de configuracao do Hadoop, HDFS, YARN e MapReduce
+- `README-java-app.md`: guia conceitual de como uma aplicacao Java externa poderia gravar dados no HDFS e submeter processamento para este lab
 
 ## Servicos que serao criados
 
@@ -93,6 +94,18 @@ Depois que os containers estiverem inicializados, os servicos ficam disponiveis 
 - NodeManager 2 UI: http://localhost:8043
 - NodeManager 3 UI: http://localhost:8044
 - History Server: http://localhost:8188
+
+## Guia complementar
+
+Se voce quiser entender como uma aplicacao Java externa poderia usar este cluster, consulte tambem:
+
+- `README-java-app.md`
+
+Esse documento complementar mostra, de forma conceitual:
+
+- como uma app Java poderia gravar conteudo no HDFS via `namenode`
+- como poderia submeter um processamento via `resourcemanager`
+- como ler o resultado final de volta no HDFS
 
 ## Configuracao principal
 
