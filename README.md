@@ -10,6 +10,57 @@ A topologia deste lab e:
 - 3 `nodemanagers`
 - 1 `historyserver`
 
+## Topologia visual
+
+```text
+                         +----------------------+
+                         | aplicacao / cliente  |
+                         | hdfs dfs / job client|
+                         +----------+-----------+
+                                    |
+               +--------------------+--------------------+
+               |                                         |
+               v                                         v
+      +--------+--------+                      +---------+---------+
+      |    namenode     |                      |   resourcemanager |
+      | HDFS metadados  |                      | YARN scheduler    |
+      +---+---------+---+                      +----+----------+---+
+          |         |                               |          |
+          |         |                               |          |
+          v         v                               v          v
+   +------+--+ +----+-----+                 +------+--+ +-----+-----+
+   |datanode1| |datanode2 |                 |nodemgr1 | |nodemgr2    |
+   | blocos  | | blocos   |                 | executa | | executa    |
+   +------+--+ +----+-----+                 +------+--+ +-----+-----+
+          \         /                               \          /
+           \       /                                 \        /
+            v     v                                   v      v
+            +-----+-----------------------------------+------+
+            |              datanode3 / nodemgr3              |
+            |      blocos HDFS e execucao YARN adicional     |
+            +-------------------------+-----------------------+
+                                      |
+                                      v
+                             +--------+--------+
+                             |  historyserver  |
+                             | logs e historico|
+                             +-----------------+
+```
+
+## Quem fala com quem
+
+- para gravar ou ler arquivos no HDFS, o cliente fala primeiro com o `namenode`
+- depois disso, os dados reais sao lidos ou gravados nos `datanodes`
+- para submeter um job MapReduce, o cliente fala com o `resourcemanager`
+- o `resourcemanager` distribui a execucao para os `nodemanagers`
+- durante o processamento, as tarefas leem e escrevem dados no HDFS
+- depois que o job termina, o `historyserver` permite consultar historico e logs
+
+Resumo rapido:
+
+- HDFS: cliente -> `namenode` -> `datanodes`
+- YARN: cliente -> `resourcemanager` -> `nodemanagers`
+
 O objetivo e disponibilizar um ambiente local simples para estudo de:
 
 - HDFS
