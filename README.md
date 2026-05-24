@@ -468,6 +468,28 @@ Se o `wordcount` falhar com `Input path does not exist: hdfs://namenode:9000/inp
 - recrie o arquivo com a secao `Exemplo de teste no HDFS`
 - confirme com `docker exec namenode hdfs dfs -ls /input`
 
+Se o download pelo `Browse Directory` do NameNode abrir um link interno do Docker e falhar, por exemplo:
+
+```text
+http://b64388d0e03a:9864/webhdfs/v1/input/teste.txt?op=OPEN&namenoderpcaddress=namenode:9000&offset=0
+```
+
+- esse comportamento e esperado em laboratorios Docker com WebHDFS
+- o NameNode apenas redireciona o download para o DataNode que contem o bloco do arquivo
+- o navegador passa a tentar acessar o hostname interno do container, que normalmente nao existe fora da rede Docker
+
+Alternativas praticas neste lab:
+
+- ler o arquivo no terminal com `docker exec namenode hdfs dfs -cat /input/teste.txt`
+- baixar para o filesystem local do container com `docker exec namenode hdfs dfs -get /input/teste.txt /tmp/`
+- copiar do container para o host com `docker cp namenode:/tmp/teste.txt .`
+
+Solucao conceitual para acesso externo via navegador:
+
+- os servicos do HDFS precisam anunciar nomes DNS ou enderecos acessiveis fora do Docker
+- em especial, os `DataNodes` tambem precisam anunciar hostnames e portas externas corretas
+- nao basta apenas o `namenode`, porque o download via WebHDFS termina no `DataNode`
+
 Se voce estiver migrando de uma versao anterior deste lab com apenas 1 DataNode:
 
 - metadados antigos podem manter o NameNode em `safe mode` ou causar erro de recuperacao no `ResourceManager`
