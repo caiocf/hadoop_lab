@@ -316,6 +316,68 @@ Trecho tipico de saida:
 
 Arquivos pequenos podem aparecer com apenas `1` bloco, o que e esperado. Para ver varios blocos distribuidos entre os `DataNodes`, use um arquivo maior que `128 MB`.
 
+## Exemplo complementar: arquivo de 400 MB e quebra em blocos
+
+Se voce quiser enxergar a divisao real de um arquivo em varios blocos, pode gerar um arquivo maior que `128 MB`.
+
+1. Entre no container do NameNode:
+
+```powershell
+docker exec -it namenode bash
+```
+
+2. Dentro do container, execute:
+
+```bash
+dd if=/dev/zero of=/tmp/arquivo-400mb.bin bs=1M count=400
+hdfs dfs -mkdir -p /input-grande
+hdfs dfs -put -f /tmp/arquivo-400mb.bin /input-grande/
+hdfs fsck /input-grande/arquivo-400mb.bin -files -blocks -locations
+```
+
+3. Um resultado tipico sera parecido com:
+
+```text
+/input-grande/arquivo-400mb.bin 419430400 bytes, replicated: replication=3, 4 block(s):  OK
+0. ... len=134217728 Live_repl=3 [DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...]]
+1. ... len=134217728 Live_repl=3 [DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...]]
+2. ... len=134217728 Live_repl=3 [DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...]]
+3. ... len=16777216 Live_repl=3 [DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...], DatanodeInfoWithStorage[...]]
+```
+
+Como interpretar:
+
+- `419430400 bytes` significa que o arquivo tem `400 MB`
+- `replication=3` significa que cada bloco deve ter `3` replicas
+- `4 block(s)` significa que o arquivo foi dividido em `4` blocos
+- `0.`, `1.`, `2.`, `3.` representam o primeiro, segundo, terceiro e quarto bloco
+- `len=134217728` significa que o bloco tem `128 MB`
+- `len=16777216` significa que o ultimo bloco tem `16 MB`
+- `Live_repl=3` significa que existem `3` replicas ativas daquele bloco
+- `DatanodeInfoWithStorage[...]` mostra em quais `DataNodes` aquele bloco esta armazenado
+
+Por que aparecem `4` blocos:
+
+- bloco 1 = `128 MB`
+- bloco 2 = `128 MB`
+- bloco 3 = `128 MB`
+- bloco 4 = `16 MB`
+
+Somando:
+
+- `128 + 128 + 128 + 16 = 400 MB`
+
+Por que os mesmos 3 `DataNodes` aparecem em todos os blocos:
+
+- este lab possui exatamente `3` `DataNodes`
+- o fator de replicacao padrao tambem e `3`
+- por isso, cada bloco acaba tendo `1` replica em cada `DataNode`
+
+Observacao:
+
+- em um cluster maior, com mais `DataNodes`, nem sempre todos os blocos ficariam exatamente no mesmo conjunto de maquinas
+- neste lab, como existem apenas `3` `DataNodes`, a tendencia e cada bloco ficar replicado nos tres
+
 ## Exemplo de teste do MapReduce
 
 Depois de confirmar que `/input/teste.txt` existe no HDFS, voce pode executar um `wordcount` para validar HDFS, YARN e History Server.
