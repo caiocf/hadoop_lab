@@ -178,6 +178,13 @@ Neste laboratorio:
 - o tamanho padrao de bloco do HDFS foi definido como `128 MB`
 - o fator de replicacao padrao foi definido como `3`
 
+Esse valor de replicacao e o padrao do cluster, mas pode ser sobrescrito por arquivo ou diretorio.
+
+Exemplos:
+
+- criar um arquivo com replicacao `2`: `hdfs dfs -D dfs.replication=2 -put arquivo.txt /input/`
+- alterar depois: `hdfs dfs -setrep 2 /input/arquivo.txt`
+
 Na pratica, isso significa que:
 
 - arquivos pequenos, como os exemplos deste tutorial, normalmente ocupam apenas 1 bloco
