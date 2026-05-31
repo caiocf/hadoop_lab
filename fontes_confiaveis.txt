@@ -1,0 +1,338 @@
+
+
+## Fontes confiáveis únicas
+
+
+Apache Hadoop 3.2.1 overview: https://hadoop.apache.org/docs/r3.2.1/
+Apache Hadoop 3.2.1 Single Node Setup: https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-common/SingleCluster.html
+Apache Hadoop 3.2.1 Cluster Setup: https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-common/ClusterSetup.html
+Apache Hadoop 3.2.1 Commands Guide: https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-common/CommandsManual.html
+Apache Hadoop 3.2.1 HDFS Users Guide: https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html
+Apache Hadoop 3.2.1 YARN overview: https://hadoop.apache.org/docs/r3.2.1/hadoop-yarn/hadoop-yarn-site/YARN.html
+Apache Hadoop 3.2.1 YARN Commands: https://hadoop.apache.org/docs/r3.2.1/hadoop-yarn/hadoop-yarn-site/YarnCommands.html
+Apache Hadoop 3.2.1 MapReduce Tutorial: https://hadoop.apache.org/docs/r3.2.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
+
+
+### Segurança, DoS e redes
+
+1. CTIR Gov.br — recomendações sobre DoS/DDoS
+   [https://www.gov.br/ctir/pt-br/assuntos/alertas-e-recomendacoes/recomendacoes/2024/recomendacao-01-2024](https://www.gov.br/ctir/pt-br/assuntos/alertas-e-recomendacoes/recomendacoes/2024/recomendacao-01-2024)
+
+2. CIS — Denial of Service Attacks
+   [https://www.cisecurity.org/insights/spotlight/ei-isac-cybersecurity-spotlight-denial-of-service-dos-attacks](https://www.cisecurity.org/insights/spotlight/ei-isac-cybersecurity-spotlight-denial-of-service-dos-attacks)
+
+3. IETF — RFC 768, UDP
+   [https://www.rfc-editor.org/rfc/rfc768](https://www.rfc-editor.org/rfc/rfc768)
+
+4. IETF — RFC 9110, HTTP Semantics
+   [https://www.rfc-editor.org/rfc/rfc9110.html](https://www.rfc-editor.org/rfc/rfc9110.html)
+
+5. IETF — RFC 6455, WebSocket Protocol
+   [https://datatracker.ietf.org/doc/html/rfc6455](https://datatracker.ietf.org/doc/html/rfc6455)
+
+---
+
+### Docker, containers, VMs, OpenShift e Kubernetes
+
+6. Docker Docs — What is a container?
+   [https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/](https://docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container/)
+
+7. Docker Docs — docker run
+   [https://docs.docker.com/reference/cli/docker/container/run/](https://docs.docker.com/reference/cli/docker/container/run/)
+
+8. Docker Docs — docker exec
+   [https://docs.docker.com/reference/cli/docker/container/exec/](https://docs.docker.com/reference/cli/docker/container/exec/)
+
+9. Docker Hub
+   [https://hub.docker.com/](https://hub.docker.com/)
+
+10. Red Hat OpenShift — overview
+    [https://docs.redhat.com/en/documentation/openshift_container_platform/4.12/html/getting_started/openshift-overview](https://docs.redhat.com/en/documentation/openshift_container_platform/4.12/html/getting_started/openshift-overview)
+
+11. Kubernetes Docs — Pods
+    [https://kubernetes.io/docs/concepts/workloads/pods/](https://kubernetes.io/docs/concepts/workloads/pods/)
+
+12. Kubernetes Docs — Components
+    [https://kubernetes.io/docs/concepts/overview/components/](https://kubernetes.io/docs/concepts/overview/components/)
+
+13. Kubernetes Docs — Namespaces
+    [https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
+
+14. Kubernetes Docs — kubectl
+    [https://kubernetes.io/docs/reference/kubectl/](https://kubernetes.io/docs/reference/kubectl/)
+
+15. Kubernetes Docs — kubectl Quick Reference
+    [https://kubernetes.io/docs/reference/kubectl/quick-reference/](https://kubernetes.io/docs/reference/kubectl/quick-reference/)
+
+16. Minikube Docs
+    [https://minikube.sigs.k8s.io/docs/](https://minikube.sigs.k8s.io/docs/)
+
+---
+
+### Linux, shell, POSIX e comandos
+
+17. GNU Bash Manual
+    [https://www.gnu.org/software/bash/manual/bash.html](https://www.gnu.org/software/bash/manual/bash.html)
+
+18. GNU Coreutils — file permissions, chmod e permissões octais
+    [https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html](https://www.gnu.org/software/coreutils/manual/html_node/File-permissions.html)
+
+19. GNU Coreutils — chown
+    [https://www.gnu.org/software/coreutils/manual/html_node/chown-invocation.html](https://www.gnu.org/software/coreutils/manual/html_node/chown-invocation.html)
+
+20. Filesystem Hierarchy Standard — /etc, /home etc.
+    [https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html)
+
+21. The Open Group — POSIX Threads
+    [https://www.opengroup.org/onlinepubs/007908799/xsh/threads.html](https://www.opengroup.org/onlinepubs/007908799/xsh/threads.html)
+
+22. man7 — systemctl
+    [https://man7.org/linux/man-pages/man1/systemctl.1.html](https://man7.org/linux/man-pages/man1/systemctl.1.html)
+
+23. man7 — netstat
+    [https://man7.org/linux/man-pages/man8/netstat.8.html](https://man7.org/linux/man-pages/man8/netstat.8.html)
+
+24. curl — man page oficial
+    [https://curl.se/docs/manpage.html](https://curl.se/docs/manpage.html)
+
+25. man7 — ps
+    [https://man7.org/linux/man-pages/man1/ps.1.html](https://man7.org/linux/man-pages/man1/ps.1.html)
+
+26. man7 — top
+    [https://man7.org/linux/man-pages/man1/top.1.html](https://man7.org/linux/man-pages/man1/top.1.html)
+
+27. man7 — free
+    [https://man7.org/linux/man-pages/man1/free.1.html](https://man7.org/linux/man-pages/man1/free.1.html)
+
+---
+
+### Programação, lógica, recursão e sintaxe
+
+28. Oracle Java Tutorials — while e do-while
+    [https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html)
+
+29. Oracle Java Tutorials — control flow
+    [https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/flow.html)
+
+30. cppreference — operadores de atribuição em C/C++
+    [https://en.cppreference.com/w/cpp/language/operator_assignment](https://en.cppreference.com/w/cpp/language/operator_assignment)
+
+31. Python Docs — expressões booleanas e operadores
+    [https://docs.python.org/3/reference/expressions.html](https://docs.python.org/3/reference/expressions.html)
+
+32. Python Docs — regex
+    [https://docs.python.org/3/library/re.html](https://docs.python.org/3/library/re.html)
+
+---
+
+### APIs, HTTP, JSON, WebSocket e testes
+
+33. MDN — HTTP request methods
+    [https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods)
+
+34. MDN — GET
+    [https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/GET)
+
+35. MDN — POST
+    [https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods/POST)
+
+36. ECMA — JSON / ECMA-404
+    [https://ecma-international.org/publications-and-standards/standards/ecma-404/](https://ecma-international.org/publications-and-standards/standards/ecma-404/)
+
+37. JSON.org
+    [https://www.json.org/](https://www.json.org/)
+
+38. Postman — API testing
+    [https://www.postman.com/api-platform/api-testing/](https://www.postman.com/api-platform/api-testing/)
+
+39. Microsoft Learn — testes de integração
+    [https://learn.microsoft.com/pt-br/aspnet/core/test/integration-tests](https://learn.microsoft.com/pt-br/aspnet/core/test/integration-tests)
+
+---
+
+### Microsserviços, CQRS, Event Sourcing e Service Mesh
+
+40. AWS — What are microservices?
+    [https://aws.amazon.com/microservices/](https://aws.amazon.com/microservices/)
+
+41. Microsoft Azure Architecture Center — Microservices architecture
+    [https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices)
+
+42. Microsoft Azure Architecture Center — CQRS Pattern
+    [https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
+
+43. Microsoft Azure Architecture Center — Event Sourcing Pattern
+    [https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing](https://learn.microsoft.com/en-us/azure/architecture/patterns/event-sourcing)
+
+44. Istio — Service Mesh
+    [https://istio.io/latest/about/service-mesh/](https://istio.io/latest/about/service-mesh/)
+
+45. Istio — Architecture
+    [https://istio.io/latest/docs/ops/deployment/architecture/](https://istio.io/latest/docs/ops/deployment/architecture/)
+
+46. Refactoring.Guru — Builder Pattern
+    [https://refactoring.guru/design-patterns/builder](https://refactoring.guru/design-patterns/builder)
+
+---
+
+### Modelagem de dados, SQL, normalização e otimização
+
+47. IBM Db2 — normalização em banco de dados
+    [https://www.ibm.com/docs/en/db2-for-zos/12.0.0?topic=modeling-normalization-in-database-design](https://www.ibm.com/docs/en/db2-for-zos/12.0.0?topic=modeling-normalization-in-database-design)
+
+48. IBM — Database normalization
+    [https://www.ibm.com/think/topics/database-normalization](https://www.ibm.com/think/topics/database-normalization)
+
+49. PostgreSQL Docs — constraints, primary key e foreign key
+    [https://www.postgresql.org/docs/current/ddl-constraints.html](https://www.postgresql.org/docs/current/ddl-constraints.html)
+
+50. PostgreSQL Docs — indexes
+    [https://www.postgresql.org/docs/current/indexes-intro.html](https://www.postgresql.org/docs/current/indexes-intro.html)
+
+51. PostgreSQL Docs — joins
+    [https://www.postgresql.org/docs/current/tutorial-join.html](https://www.postgresql.org/docs/current/tutorial-join.html)
+
+52. PostgreSQL Docs — table expressions e outer joins
+    [https://www.postgresql.org/docs/current/queries-table-expressions.html](https://www.postgresql.org/docs/current/queries-table-expressions.html)
+
+53. Oracle — Data Warehouse Logical Design e Star Schema
+    [https://docs.oracle.com/en/database/oracle/oracle-database/19/dwhsg/data-warehouse-logical-design.html](https://docs.oracle.com/en/database/oracle/oracle-database/19/dwhsg/data-warehouse-logical-design.html)
+
+---
+
+### Data Warehouse, Data Lake, OLTP, OLAP, ETL e ELT
+
+54. AWS — Data Lake vs Data Warehouse vs Data Mart
+    [https://aws.amazon.com/compare/the-difference-between-a-data-warehouse-data-lake-and-data-mart/](https://aws.amazon.com/compare/the-difference-between-a-data-warehouse-data-lake-and-data-mart/)
+
+55. AWS — ETL vs ELT
+    [https://aws.amazon.com/compare/the-difference-between-etl-and-elt/](https://aws.amazon.com/compare/the-difference-between-etl-and-elt/)
+
+56. AWS — OLAP vs OLTP
+    [https://aws.amazon.com/compare/the-difference-between-olap-and-oltp/](https://aws.amazon.com/compare/the-difference-between-olap-and-oltp/)
+
+57. AWS — What is ETL?
+    [https://aws.amazon.com/what-is/etl/](https://aws.amazon.com/what-is/etl/)
+
+58. AWS Whitepaper — Data Warehousing on AWS / data processing
+    [https://docs.aws.amazon.com/whitepapers/latest/data-warehousing-on-aws/data-processing.html](https://docs.aws.amazon.com/whitepapers/latest/data-warehousing-on-aws/data-processing.html)
+
+59. Informatica — Active and Passive Transformations
+    [https://knowledge.informatica.com/s/article/525288?language=en_US](https://knowledge.informatica.com/s/article/525288?language=en_US)
+
+---
+
+### NoSQL, BSON, Regex, CPF/CNPJ/URL e formatos de dados
+
+60. MongoDB — tipos de bancos NoSQL
+    [https://www.mongodb.com/resources/basics/databases/nosql-explained/types-of-nosql-database-management-systems](https://www.mongodb.com/resources/basics/databases/nosql-explained/types-of-nosql-database-management-systems)
+
+61. MongoDB — BSON Types
+    [https://www.mongodb.com/docs/manual/reference/bson-types/](https://www.mongodb.com/docs/manual/reference/bson-types/)
+
+62. BSON Specification
+    [https://bsonspec.org/spec.html](https://bsonspec.org/spec.html)
+
+63. IETF — RFC 3986, URI/URL syntax
+    [https://www.rfc-editor.org/rfc/rfc3986](https://www.rfc-editor.org/rfc/rfc3986)
+
+---
+
+### Hadoop, HDFS, YARN, MapReduce e Hive
+
+64. Apache Hadoop 3.2.1 — documentação principal
+    [https://hadoop.apache.org/docs/r3.2.1/](https://hadoop.apache.org/docs/r3.2.1/)
+
+65. Apache Hadoop 3.2.1 — HDFS User Guide
+    [https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html](https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html)
+
+66. Apache Hadoop 3.2.1 — HDFS Architecture
+    [https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html](https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html)
+
+67. Apache Hadoop 3.2.1 — YARN
+    [https://hadoop.apache.org/docs/r3.2.1/hadoop-yarn/hadoop-yarn-site/YARN.html](https://hadoop.apache.org/docs/r3.2.1/hadoop-yarn/hadoop-yarn-site/YARN.html)
+
+68. Apache Hadoop 3.2.1 — MapReduce Tutorial
+    [https://hadoop.apache.org/docs/r3.2.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html](https://hadoop.apache.org/docs/r3.2.1/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html)
+
+69. Apache Hadoop 3.2.1 — Rack Awareness
+    [https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-common/RackAwareness.html](https://hadoop.apache.org/docs/r3.2.1/hadoop-project-dist/hadoop-common/RackAwareness.html)
+
+70. Apache Hive — Language Manual SELECT
+    [https://hive.apache.org/docs/latest/language/languagemanual-select/](https://hive.apache.org/docs/latest/language/languagemanual-select/)
+
+71. Apache Hive — Language Manual DDL
+    [https://hive.apache.org/docs/latest/language/languagemanual-ddl/](https://hive.apache.org/docs/latest/language/languagemanual-ddl/)
+
+---
+
+### Spark, Parquet e Solr
+
+72. Apache Spark — RDD Programming Guide
+    [https://spark.apache.org/docs/latest/rdd-programming-guide.html](https://spark.apache.org/docs/latest/rdd-programming-guide.html)
+
+73. Apache Spark — SQL, DataFrames and Datasets Guide
+    [https://spark.apache.org/docs/latest/sql-programming-guide.html](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+
+74. Apache Spark — SQL Performance Tuning
+    [https://spark.apache.org/docs/latest/sql-performance-tuning.html](https://spark.apache.org/docs/latest/sql-performance-tuning.html)
+
+75. Apache Spark — Running on YARN
+    [https://spark.apache.org/docs/latest/running-on-yarn.html](https://spark.apache.org/docs/latest/running-on-yarn.html)
+
+76. Apache Spark — Standalone Mode
+    [https://spark.apache.org/docs/latest/spark-standalone.html](https://spark.apache.org/docs/latest/spark-standalone.html)
+
+77. Apache Parquet — documentação
+    [https://parquet.apache.org/docs/](https://parquet.apache.org/docs/)
+
+78. Apache Parquet — file format
+    [https://parquet.apache.org/docs/file-format/](https://parquet.apache.org/docs/file-format/)
+
+79. Apache Solr Reference Guide
+    [https://solr.apache.org/guide/solr/latest/index.html](https://solr.apache.org/guide/solr/latest/index.html)
+
+---
+
+### Kafka, HBase e Sqoop
+
+80. Apache Kafka — documentação oficial
+    [https://kafka.apache.org/documentation/](https://kafka.apache.org/documentation/)
+
+81. Apache Kafka — Topic Configs
+    [https://kafka.apache.org/41/configuration/topic-configs/](https://kafka.apache.org/41/configuration/topic-configs/)
+
+82. Apache HBase — Reference Guide
+    [https://hbase.apache.org/apache_hbase_reference_guide.pdf](https://hbase.apache.org/apache_hbase_reference_guide.pdf)
+
+83. Apache Sqoop — User Guide
+    [https://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html](https://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html)
+
+---
+
+### NiFi, Airflow e orquestração
+
+84. Apache NiFi — Overview
+    [https://nifi.apache.org/nifi-docs/overview.html](https://nifi.apache.org/nifi-docs/overview.html)
+
+85. Apache NiFi — User Guide
+    [https://nifi.apache.org/docs/nifi-docs/html/user-guide.html](https://nifi.apache.org/docs/nifi-docs/html/user-guide.html)
+
+86. Apache Airflow — documentação oficial
+    [https://airflow.apache.org/](https://airflow.apache.org/)
+
+87. Apache Airflow — Authoring and Scheduling
+    [https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/index.html](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/index.html)
+
+88. Apache Airflow — Scheduler
+    [https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html)
+
+---
+
+### Mineração de dados e ML clássico
+
+89. Oracle — Data Mining Concepts
+    [https://docs.oracle.com/en/database/oracle/oracle-database/18/dmcon/data-mining-basics.html](https://docs.oracle.com/en/database/oracle/oracle-database/18/dmcon/data-mining-basics.html)
+
+90. IBM — CRISP-DM no SPSS Modeler
+    [https://www.ibm.com/docs/en/spss-modeler/18.6.0?topic=overview-crisp-dm-in-spss-modeler](https://www.ibm.com/docs/en/spss-modeler/18.6.0?topic=overview-crisp-dm-in-spss-modeler)
